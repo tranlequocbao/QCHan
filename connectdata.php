@@ -6,7 +6,7 @@
     // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-    $servername = "localhost";
+    $servername = "10.40.12.6";
 	$username = "root";
 	$password = "";
 	$db="qc_han";
