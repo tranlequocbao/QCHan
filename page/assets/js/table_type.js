@@ -1,4 +1,3 @@
-
 function body(bodytype) {
     var table = '';
     if (bodytype == 'J72A') {
@@ -438,8 +437,7 @@ function body(bodytype) {
         <td>RH: <input type="number" step="0.01" class="form-control" id="08StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
         `;
-    }
-    else if (bodytype == 'J72K') {
+    } else if (bodytype == 'J72K') {
         table = ` <tr>
         <td rowspan="4">Cửa trước và cửa sau</td>
         <td rowspan="2">09</td>
@@ -878,9 +876,7 @@ function body(bodytype) {
         <td>RH: <input type="number" step="0.01" class="form-control" id="08StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
         `;
-    }
-
-    else if (bodytype == 'J71E') {
+    } else if (bodytype == 'J71E') {
         table = ` <tr>
         <td>Cửa trước và mảng hông</td>
         <td>07</td>
@@ -1295,8 +1291,7 @@ function body(bodytype) {
         <td>RH: <input type="number" step="0.01" class="form-control" id="05StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
               `;
-    }
-    else if (bodytype == 'J59C_SD') {
+    } else if (bodytype == 'J59C_SD') {
         table = ` <tr>
         <td rowspan="4">Cửa trước và cửa sau</td>
         <td rowspan="2">09<br>(11.4WL)</td>
@@ -1410,13 +1405,13 @@ function body(bodytype) {
         <td>Gap</td>
         <td>2.7±0.8</td>
         <td>1.9~3.5</td>
-        <td>RH: <input type="number" step="0.01" class="form-control" id="15GapRH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="16GapRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
         <tr>
         <td>Step</td>
         <td>3.3±1.0</td>
         <td>2.3~4.3</td>
-        <td>RH: <input type="number" step="0.01" class="form-control" id="15StepRH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="16StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
         
@@ -1457,13 +1452,13 @@ function body(bodytype) {
         <td>Gap</td>
         <td>2.7±0.8</td>
         <td>1.9~3.5</td>
-        <td>LH: <input type="number" step="0.01" class="form-control" id="15GapLH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>LH: <input type="number" step="0.01" class="form-control" id="16GapLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
         <tr>
         <td>Step</td>
         <td>3.3±1.0</td>
         <td>2.3~4.3</td>
-        <td>LH: <input type="number" step="0.01" class="form-control" id="15StepLH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>LH: <input type="number" step="0.01" class="form-control" id="16StepLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
 
@@ -1579,20 +1574,20 @@ function body(bodytype) {
 
         <tr>
         <td rowspan="2">Mảng hông và trụ A</td>
-        <td rowspan="2">17(*1)</td>
+        <td>17(*1)</td>
         <td>Up BL diff.</td>
         <td>0.0±1.0</td>
         <td>-1.0~+1.0</td>
-        <td>LH: <input type="number" step="0.01" class="form-control" id="17up" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>LH: <input type="number" step="0.01" class="form-control" id="17upLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
 
         <tr>
-        <td rowspan="2">18(*1)</td>
+        <td>18(*1)</td>
         <td>Low BL diff.</td>
         <td>0.0±1.0</td>
         <td>-1.0~+1.0</td>
-        <td>LH: <input type="number" step="0.01" class="form-control" id="18low" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>LH: <input type="number" step="0.01" class="form-control" id="18lowLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
         
@@ -1719,7 +1714,7 @@ function body(bodytype) {
         <td>Step (cử)</td>
         <td>3.0±1.0</td>
         <td>2.0~4.0</td>
-        <td>RH: <input type="number" step="0.01" class="form-control" id="02StepLH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="02StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
 
@@ -1793,7 +1788,7 @@ function body(bodytype) {
         <td>Up BL diff.</td>
         <td>0.0+1.0</td>
         <td>-1.0~+1.0</td>
-        <td>RH: <input type="number" step="0.01" class="form-control" id="17up" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="17upRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
 
@@ -1803,7 +1798,7 @@ function body(bodytype) {
         <td>Low BL diff.</td>
         <td>0.0+1.0</td>
         <td>-1.0~+1.0</td>
-        <td>RH: <input type="number" step="0.01" class="form-control" id="18low" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="18lowRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
 
@@ -1839,8 +1834,7 @@ function body(bodytype) {
         <td>RH: <input type="number" step="0.01" class="form-control" id="08StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
         `;
-    }
-    else if (bodytype == 'J59C_HB') {
+    } else if (bodytype == 'J59C_HB') {
         table = ` <tr>
         <td rowspan="4">Cửa trước và cửa sau</td>
         <td rowspan="2">09 <br> (11.4WL)</td>
@@ -1957,13 +1951,13 @@ function body(bodytype) {
         <td>Gap</td>
         <td>4.1±0.7/-1.3</td>
         <td>2.8~4.8</td>
-        <td>RH: <input type="number" step="0.01" class="form-control" id="15GapRH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="16GapRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
         <tr>
         <td>Step</td>
         <td>3.0±1.0</td>
         <td>2.0~4.0</td>
-        <td>RH: <input type="number" step="0.01" class="form-control" id="15StepRH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="16StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>git 
 
         
@@ -2004,13 +1998,13 @@ function body(bodytype) {
         <td>Gap</td>
         <td>4.1±0.7/-1.3</td>
         <td>2.8~4.8</td>
-        <td>LH: <input type="number" step="0.01" class="form-control" id="15GapLH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>LH: <input type="number" step="0.01" class="form-control" id="16GapLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
         <tr>
         <td>Step</td>
         <td>3.0±1.0</td>
         <td>2.0~+4.0</td>
-        <td>LH: <input type="number" step="0.01" class="form-control" id="15StepLH" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>LH: <input type="number" step="0.01" class="form-control" id="16StepLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
 
@@ -2130,7 +2124,7 @@ function body(bodytype) {
         <td>Up BL diff.</td>
         <td>0.0±1.0</td>
         <td>-1.0~1.0</td>
-        <td>LH: <input type="number" step="0.01" class="form-control" id="17up" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>LH: <input type="number" step="0.01" class="form-control" id="17upLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
 
@@ -2139,7 +2133,7 @@ function body(bodytype) {
         <td>Low BL diff.</td>
         <td>0.0±1.0</td>
         <td>-1.0~1.0</td>
-        <td>LH: <input type="number" step="0.01" class="form-control" id="18low" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>LH: <input type="number" step="0.01" class="form-control" id="18lowLH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
         
@@ -2340,7 +2334,7 @@ function body(bodytype) {
         <td>Up BL diff.</td>
         <td>0.0+1.0</td>
         <td>-1.0~+1.0</td>
-        <td>RH: <input type="number" step="0.01" class="form-control" id="17up" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="17upRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
 
@@ -2350,7 +2344,7 @@ function body(bodytype) {
         <td>Low BL diff.</td>
         <td>0.0+1.0</td>
         <td>-1.0~+1.0</td>
-        <td>RH: <input type="number" step="0.01" class="form-control" id="18low" style="width: 80px;" placeholder="Sai số"/></td>
+        <td>RH: <input type="number" step="0.01" class="form-control" id="18lowRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
 
 
@@ -2385,8 +2379,8 @@ function body(bodytype) {
         <td>-2.6~-0.9</td>       
         <td>RH: <input type="number" step="0.01" class="form-control" id="08StepRH" style="width: 80px;" placeholder="Sai số"/></td>
         </tr>
-        `;}
+        `;
+    }
 
     return table;
 }
-

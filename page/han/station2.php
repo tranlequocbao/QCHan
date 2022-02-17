@@ -49,7 +49,7 @@ if (strpos($_SERVER['HTTP_HOST'], 'localhost') == 0) {
   <link rel="stylesheet" href="<?= $url . 'vendor/bootstrap/css/bootstrap.min.css' ?>">
 </head>
 
-<body class="">
+<body class="" >
 
   <div class="row pt-3 pb-3">
     <div class="col-8">
@@ -219,9 +219,9 @@ if (strpos($_SERVER['HTTP_HOST'], 'localhost') == 0) {
   <!-- Library for adding dinamically elements -->
   <script src="./Dashboard/assets/js/plugins/arrive.min.js"></script>
   <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>-->
   <!-- Chartist JS -->
-  <script src="./Dashboard/assets/js/plugins/chartist.min.js"></script>
+  <!-- <script src="./Dashboard/assets/js/plugins/chartist.min.js"></script> --> -->
   <!--  Notifications Plugin    -->
   <script src="<?= $url . 'Dashboard/assets/js/plugins/bootstrap-notify.js' ?>"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->

@@ -417,23 +417,29 @@ if (strpos($_SERVER['HTTP_HOST'], 'localhost') == 0) {
 
       
       $('#submit').on('click', function() {
-        var idArray = [];
+        var idArray = {};
         var valueArray = ['CG01GapLH', 'CG01GapRH'];
         $('.table .form-control').each(function() {
-          idArray.push(this.id);
+          
+          idArray[this.id]=$('#' + this.id + '').val();
+          
         });
-        for (var item = 0; item < idArray.length; item++) {
-          if ($('#' + idArray[item] + '').val()) {
-            // console.log(idArray[item]);
-            // console.log($('#' + idArray[item] + '').val());
+        var size = Object.keys(idArray).length;
+        console.log(idArray) ; console.log(size) ;
+        car.saveDataKHDP(vincode,idArray,'create');
+        
+        // for (var item = 0; item < idArray.length; item++) {
+        //   if ($('#' + idArray[item] + '').val()) {
+        //     // console.log(idArray[item]);
+        //     // console.log($('#' + idArray[item] + '').val());
 
-            car.save_station01_han(vincode, idArray[item], $('#' + idArray[item] + '').val(), 'create');
+        //     car.save_station01_han(vincode, idArray[item], $('#' + idArray[item] + '').val(), 'create');
 
-          }
+        //   }
 
-        }
-        alert("Đã thêm dữ liệu thành công");
-        window.location.reload();
+        // }
+        // alert("Đã thêm dữ liệu thành công");
+        // window.location.reload();
       })
       $('#confirm').on('click', function() {
         var idArray = [];

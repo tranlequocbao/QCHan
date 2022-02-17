@@ -139,7 +139,37 @@ function car() {
 
 
     }
+    this.saveDataKHDP = (vincode, result, button) => {
 
+        let result111 = "";
+        $.ajax({
+            url: '../insert_01_han.php',
+            type: 'POST',
+            cache: false,
+            data: {
+                vincode: vincode,
+                result: result,
+                button: button,
+            },
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                if (data.statusCode == 200) {
+                    alert("Đã thêm dữ liệu thành công");
+                    window.location.reload();
+                } else(
+                    alert('LƯU THÔNG TIN THẤT BẠI')
+                )
+
+            },
+            error: function(error) {
+                console.log(error.responseText);
+            },
+
+
+        })
+        return result111;
+    }
     this.save_station01_han = (vincode, id, value, button) => {
 
         let result111 = "";
@@ -836,7 +866,7 @@ function car() {
             $img = await self.cbConvertImg(".qc1k_area", isNotCheck, exportAuto);
 
             self.saveImgIfDoneAll({
-                img = $img
+                img: $img
             });
         }
         return true;

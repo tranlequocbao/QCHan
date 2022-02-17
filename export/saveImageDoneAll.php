@@ -83,9 +83,13 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $infoCar = $row['car_folder'];
 }
-
+$configFile='';
 $nameFileExcelUse = $infoCar . '.xlsx';
-$configFile = $infoCar;
+if($infoCar=='J59C_SD')$configFile=$J59C_SD;
+else if($infoCar='J59C_HB') $configFile=$J59C_HB;
+else if($infoCar='J72A') $configFile=$J72A;
+else if($infoCar='J72K') $configFile=$J72K;
+else if($infoCar='J71E') $configFile=$J71E;
 
 //lấy màu sơn
 $sqlInfocar = 'SELECT * FROM plan_vin WHERE vincode="' . $vin_code . '"';
@@ -123,14 +127,85 @@ $objPHPExcel = PHPExcel_IOFactory::load($fileName);
 function setValue(&$activeSheet, $location, $value, $color){
     return $activeSheet->setCellValue($location,$value)->getStyle($location)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB($color);
 }
-// nhập dữ liệu vào file excel
-$objPHPExcel->setActiveSheetIndex(0)
-    ->setCellValue('A9', "SỐ KHUNG/VIN#: ".$vin_code."")
-    ->setCellValue('V9', "NGÀY KIỂM TRA/DATE: ".$date."");
 
+//get value and location khe hở độ phẳng from database
+$sqlKHDP = 'SELECT `IDval`,`value` FROM checking_01_han WHERE vincode="'.$vin_code.'"';
+$result=$conn->query($sqlKHDP);
+$KHDP=[];
+if($result->num_rows>0){
+    while($row=$result->fetch_assoc()){
+        $KHDP[$row['IDval']]=$row['value'];
+    }
+}   
+
+// nhập dữ liệu vào file excel
+extract($tittle);
+//thêm thông tin cho phiếu
+$objPHPExcel->setActiveSheetIndex(0)
+    ->setCellValue($vincode, "SỐ KHUNG/VIN#: ".$vin_code."")
+    ->setCellValue($dateUp, "NGÀY KIỂM TRA/DATE: ".$date."");
+
+    //thêm khe hở độ phẳng
+    foreach($KHDP as $key => $value){
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue($configFile['station1'][$key],$value); 
+    }
+
+    $check = array_merge($configFile['LH'],$configFile['RH']);
+    $demo=[];
+    foreach($check as $key =>$value){
+      
+        if(gettype($value)!="array"){
+           
+            if($objPHPExcel->setActiveSheetIndex(0)->getCell($value)->getValue()!="X"){
+               
+                if(checkError($key,$vin_code)==true){
+                    $objPHPExcel->setActiveSheetIndex(0)
+                    ->setCellValue($value,'X'); 
+                }else{
+                    $objPHPExcel->setActiveSheetIndex(0)
+                    ->setCellValue($value,'V'); 
+                }
+            }
+           
+            
+         }
+         else{
+            foreach($value as $val){
+                if($objPHPExcel->setActiveSheetIndex(0)->getCell($val)->getValue()!="X"){
+                   
+                    if(checkError($key,$vin_code)==true){
+                        $objPHPExcel->setActiveSheetIndex(0)
+                        ->setCellValue($val,'X'); 
+                    }
+                    else{
+                        $objPHPExcel->setActiveSheetIndex(0)
+                        ->setCellValue($val,'V'); 
+                    }
+                }
+            }
+        
+         }
+       
+    }
+   
+    function checkError($location,$vin_code){
+        global $conn;
+        $check=true;
+        $sqlCheck= 'SELECT * FROM checking_02_han WHERE vincode="'.$vin_code.'" AND error_position="'.$location.'"';
+        $demo[]=$sqlCheck;
+        $result = $conn->query($sqlCheck);
+        if($result->num_rows>0){
+            if($row=$result->fetch_assoc())
+          
+            $check=false;
+            
+        }
+        return $check;
+    }
 
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, $fileType);
 // Tiến hành ghi file
 $objWriter->save($path_file_excel);
-echo json_encode(['code' => 200, 'type' => $date]);
-return;
+echo json_encode(['code' => 200, 'type' => $demo]);
+
