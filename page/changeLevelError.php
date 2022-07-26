@@ -14,7 +14,7 @@ $arr_res = [];
 $sealer = $_POST['sealer'] ?? false;
 $err_note = $_POST['noteError'] ?? '';
 $err_code = $_POST['err_code'] ?? '';
-$povilish = $_POST['polish'] ?? '';
+$povilish = $_SESSION['Position'] ?? '';
 $usercode = $_POST['usercode'] ?? '';
 $i = 0;
 $isUserCheckV2 = isset($_SESSION['Station']) && ($_SESSION['Station']) == 'Trạm 4';

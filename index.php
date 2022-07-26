@@ -122,17 +122,4 @@ echo "<script>var _prePath = './';</script>";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 
 </body>
-
-    <script>
-        $(document).ready(function () {
-
-
-   
-        })
-    </script>
-   
-
-</body>
-
-    
 </html>

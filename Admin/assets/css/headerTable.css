@@ -1,0 +1,10 @@
+.table-responsive.tableError {
+    height: 700px;
+}
+
+thead.lstError {
+    background-color: #F5FFFA;
+    position: sticky;
+    top: 0;
+    color: black;
+}

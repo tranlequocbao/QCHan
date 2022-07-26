@@ -859,7 +859,7 @@ $home_folder = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' 
               dataType:'json',
               success: function(dataResult) {
                 // alert(IDuser + Fullname + Dept + Type + Shop);
-                console.log(dataResult);
+                //console.log(dataResult);
                 alert("Da insert data thanh cong");
                 
             
@@ -958,7 +958,7 @@ $home_folder = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' 
             var Shop = $('#btn_shopUp').text();
             var Position = $('#btn_PositionUp').text();
             var Station = $('#btn_StationUp').text();
-            console.log(IDuser, Fullname, Dept);
+            //console.log(IDuser, Fullname, Dept);
 
             if (IDuser != "" && Fullname != "" & Dept != "" && Type != "") {
               $.ajax({

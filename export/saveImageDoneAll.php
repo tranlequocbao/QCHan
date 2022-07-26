@@ -22,7 +22,7 @@ $ds = DIRECTORY_SEPARATOR;
 $path_export_temp = __DIR__ . $ds . 'files' . $ds . 'export_temp' . $ds . $vin_code;
 $name_file_excel = $vin_code . '_' . $dayCreate;
 $path_file_excel = $path_export_temp . $ds . 'excel' . $ds . $name_file_excel . '.xlsx';
-
+$pathDownload= 'files' . $ds . 'export_temp' . $ds . $vin_code. $ds . 'excel' . $ds . $name_file_excel . '.xlsx';
 //make folder if not exists
 if (!file_exists($path_export_temp . $ds . 'images')) {
     mkdir($path_export_temp . $ds . 'images', 0777, true);
@@ -87,11 +87,11 @@ if ($result->num_rows > 0) {
 $configFile = '';
 $nameFileExcelUse = $infoCar . '.xlsx';
 if ($infoCar == 'J59C_SD') $configFile = $J59C_SD;
-else if ($infoCar = 'J59C_HB') $configFile = $J59C_HB;
-else if ($infoCar = 'J72A') $configFile = $J72A;
-else if ($infoCar = 'J72K') $configFile = $J72K;
-else if ($infoCar = 'J71E') $configFile = $J71E;
-
+else if ($infoCar == 'J59C_HB') $configFile = $J59C_HB;
+else if ($infoCar == 'J72A') $configFile = $J72A;
+else if ($infoCar == 'J72K') $configFile = $J72K;
+else if ($infoCar == 'J71E') $configFile = $J71E;
+// print_r($sqlBodyType); return;
 //lấy màu sơn
 $sqlInfocar = 'SELECT * FROM plan_vin WHERE vincode="' . $vin_code . '"';
 $result = $conn->query($sqlInfocar);
@@ -160,6 +160,7 @@ foreach ($KHDP as $key => $value) {
 
 $check = array_merge($configFile['LH'], $configFile['RH']);
 $demo = [];
+//tich đạt hoặc không đạt
 foreach ($check as $key => $value) {
     
     if (gettype($value) != "array") {
@@ -189,26 +190,97 @@ foreach ($check as $key => $value) {
         }
     }
 }
-
+//load và add hình vào excel
 $loadImg = recursiveSearch("../export/files/export_temp".$ds.$vin_code.$ds."images/", "/^.*\.(jpg|jpeg|png)$/");
-$heightSignature = 68;
-$weightSignature = 80;
+$heightSignature = 70;
+$weightSignature = 90;
 foreach($loadImg as $value){
    
     $arryPath=explode("/",$value['image']);
    // print_r(end($arryPath)."<br/>") ;
     $filename=end($arryPath); 
     $val =explode(".",$filename);
-    $coordinates=$configFile['images'][$val[0]];
-    //print_r($coordinates);
-    // print_r($val);
 
-    // //$filenameFix=explode(".",$fileName);
-    
-    // echo '<br/>';
+    $coordinates=$configFile['images'][$val[0]];
     draw($objPHPExcel,$val[0], $coordinates,$value['image'],$path_file_excel,$heightSignature,$weightSignature);
 }
+// load hình con dấu vào
+// con dấu khe hở độ phẳng
 
+$khdpSign='';
+$sql_sig='SELECT * FROM checking_01_han WHERE vincode="'.$vin_code.'" LIMIT 1';
+$result=$conn->query($sql_sig);
+if($result->num_rows>0){
+    if($row=$result->fetch_assoc()){
+        $khdpSign=$row['user_create'];
+        $path=realpath("../page/assets/img/Stamp/".$khdpSign.".png");
+        draw($objPHPExcel,'Khe hở độ phẳng',$configFile['Signature']['KHDP'],$path,$path_file_excel,'68','68');
+    }
+}
+//con dâu LH
+$LH='';
+$sql_sig='SELECT * FROM checking_02_han WHERE vincode="'.$vin_code.'" AND error_user="LH" LIMIT 1';
+$result=$conn->query($sql_sig);
+if($result->num_rows>0){
+    if($row=$result->fetch_assoc()){
+        $LH=$row['user_code'];
+        $path=realpath("../page/assets/img/Stamp/".$LH.".png");
+        draw($objPHPExcel,'LH',$configFile['Signature']['Pos1'],$path,$path_file_excel,'68','68');
+        draw($objPHPExcel,'LH',$configFile['Signature']['Pos3'],$path,$path_file_excel,'68','68');
+    }
+}
+//con dâu RH
+$RH='';
+$sql_sig='SELECT * FROM checking_02_han WHERE vincode="'.$vin_code.'" AND error_user="RH" LIMIT 1';
+$result=$conn->query($sql_sig);
+if($result->num_rows>0){
+    if($row=$result->fetch_assoc()){
+        $RH=$row['user_code'];
+        $path=realpath("../page/assets/img/Stamp/".$RH.".png");
+        draw($objPHPExcel,'RH',$configFile['Signature']['Pos2'],$path,$path_file_excel,'68','68');
+        draw($objPHPExcel,'RH',$configFile['Signature']['Pos4'],$path,$path_file_excel,'68','68');
+    }
+}
+//Khắc chữ nhân sự xưởng LH
+$RH='';
+$sql_sig='SELECT * FROM car_qc1k_submit WHERE username="Trạm 3" AND car_code="'.$vin_code.'" AND povilish="LH" LIMIT 1';
+$result=$conn->query($sql_sig);
+
+if($result->num_rows>0){
+    if($row=$result->fetch_assoc()){
+        $RH=$row['fullname'];
+    
+        $objPHPExcel->setActiveSheetIndex(0)
+                        ->setCellValue($configFile['Signature']['Repair1'],$RH);
+    }
+}
+//Khắc chữ nhân sự xưởng RH
+$RH='';
+$sql_sig='SELECT * FROM car_qc1k_submit WHERE username="Trạm 3" AND car_code="'.$vin_code.'" AND povilish="RH" LIMIT 1';
+$result=$conn->query($sql_sig);
+
+if($result->num_rows>0){
+    if($row=$result->fetch_assoc()){
+        $RH=$row['fullname'];
+
+        
+        $objPHPExcel->setActiveSheetIndex(0)
+                        ->setCellValue($configFile['Signature']['Repair2'],$RH);
+    }
+}
+
+//con dâu Metal Finish
+$RH='';
+$sql_sig='SELECT * FROM car_qc1k_submit WHERE username="Trạm 4" AND car_code="'.$vin_code.'" LIMIT 1';
+$result=$conn->query($sql_sig);
+if($result->num_rows>0){
+    if($row=$result->fetch_assoc()){
+        $RH=$row['usercode'];
+        $path=realpath("../page/assets/img/Stamp/".$RH.".png");
+        draw($objPHPExcel,'RH',$configFile['Signature']['Pos5'],$path,$path_file_excel,'68','68');
+      
+    }
+}
 function draw(&$excel, $fileName, $coordinates,$signaturePath,$path_file_excel,$heightSignature,$weightSignature){
     if(!file_exists($signaturePath)){
         return true;
@@ -259,4 +331,5 @@ function recursiveSearch($folder, $pattern)
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, $fileType);
 // Tiến hành ghi file
 $objWriter->save($path_file_excel);
-echo json_encode(['code' => 200, 'type' => $demo]);
+
+echo json_encode(['code' => 200, 'path' => $pathDownload]);

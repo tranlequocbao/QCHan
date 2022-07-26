@@ -1,6 +1,6 @@
-$(document).ready(function () {
+$(document).ready(function() {
     //block drag img
-    
+
     // $('img').on('dragstart', function(event) { event.preventDefault(); });
 
     // //check isset code
@@ -21,15 +21,15 @@ $(document).ready(function () {
     var _old_modal = [];
 
     $("#bodyer")
-        .on('click', '.__img img', function (e) {
+        .on('click', '.__img img', function(e) {
             // if(noImportError || isCreateError == '0'){
             //     return true;
             // }
 
-           
+
             let _this = $(this);
             let _parent = _this.parent();
-
+            console.log(_parent);
             let _w = _this.width();
             let _h = _this.height();
 
@@ -45,38 +45,38 @@ $(document).ready(function () {
             // _modal.modal('show');
 
         })
-        .on('click', '.__img .error_point', function (event) {
+        .on('click', '.__img .error_point', function(event) {
             let _this = $(this);
             //doan nay thi la object co property la this_error ak vang
             car.this_error = _this;
             let error_type = _this.attr('mv-error') !== undefined ? _this.attr('mv-error') : '';
 
             let err_other = _this.attr('mv-errother') != undefined ? _this.attr('mv-errother') : '';
-           
+
             _old_modal = {
-                mv_type : _modal.find('.submit').attr('mv-type'),
-                title : _modal.find('#modal_error_title').text()
+                mv_type: _modal.find('.submit').attr('mv-type'),
+                title: _modal.find('#modal_error_title').text()
             };
 
             let _x = $(this).attr('mv-x');
             let _y = $(this).attr('mv-y');
 
-            if(!_this.hasClass('sealer')){
-              
+            if (!_this.hasClass('sealer')) {
+
                 _modal.find('.delete').removeClass('d-none');
                 _modal.find('.delete')
-                    .attr('mv-x',_x)
+                    .attr('mv-x', _x)
                     .attr('mv-y', _y)
                     .attr('mv-type', 'delete');
-                    
-            }else if(_this.hasClass('sealer')){
+
+            } else if (_this.hasClass('sealer')) {
                 _modal.find('#error_type').attr('disabled', 'true');
-                if(
-                    (!_this.hasClass('done_lv_2') || (_this.hasClass('done_lv_2') && Create == 1))
-                    && !_this.hasClass('done_lv_3')
-                ){
-                    console.log(_this);
-                    _modal.find('.checked_btn').show().attr('mv-errid',_this.attr('mv-errid'));
+                if (
+                    (!_this.hasClass('done_lv_2') || (_this.hasClass('done_lv_2') && Create == 1)) &&
+                    !_this.hasClass('done_lv_3')
+                ) {
+                    //console.log(_this);
+                    _modal.find('.checked_btn').show().attr('mv-errid', _this.attr('mv-errid'));
                     _modal.find('.submit').hide();
                 }
             }
@@ -84,40 +84,40 @@ $(document).ready(function () {
             _modal.find('#modal_error_title').text('Sửa lỗi');
             _modal.find('select').val(error_type);
 
-            if(error_type == err_option_other_id) {
+            if (error_type == err_option_other_id) {
                 _modal.find('.error-other-group').show().find("#err_other").val(err_other);
             }
 
-            if(!$(this).hasClass('none_choice_error')){
+            if (!$(this).hasClass('none_choice_error')) {
                 _modal.find('.submit')
-                    .attr('mv-x',_x)
+                    .attr('mv-x', _x)
                     .attr('mv-y', _y)
                     .attr('mv-type', 'edit');
-            }else{
+            } else {
                 _modal.find('#err_other').removeAttr('readonly');
             }
-            if($(this).hasClass('done_lv_2') || $(this).hasClass('done_lv_3')){
+            if ($(this).hasClass('done_lv_2') || $(this).hasClass('done_lv_3')) {
                 _modal.find(".submit").hide();
-                _modal.find('#error_type').attr('disabled','');
+                _modal.find('#error_type').attr('disabled', '');
             }
-            if(!_this.hasClass('none_choice_error')){
-                if(Dept=='QC' && _this.hasClass('done_lv_2')){
-                    if(!_this.hasClass('done_lv_3')){
+            if (!_this.hasClass('none_choice_error')) {
+                if (Dept == 'QC' && _this.hasClass('done_lv_2')) {
+                    if (!_this.hasClass('done_lv_3')) {
                         _modal.find('.note-group').show();
                         _modal.find('.checked_btn').show();
                     }
                     _modal.find('.submit').hide();
                     _modal.find('.delete').addClass('d-none');
                 }
-				if((_this.hasClass('done_lv_2') &&  _this.hasClass('sealer')) || (_this.hasClass('done_lv_3') &&  _this.hasClass('sealer'))){
+                if ((_this.hasClass('done_lv_2') && _this.hasClass('sealer')) || (_this.hasClass('done_lv_3') && _this.hasClass('sealer'))) {
                     let notes = _this.attr('mv-errnote');
-                    if(typeof notes != 'undefined' && notes != 'null' && notes != undefined && notes != '')
-						_modal.find('.note-group').show().find('#note_this_error').val(notes).attr('disabled', 'true');
+                    if (typeof notes != 'undefined' && notes != 'null' && notes != undefined && notes != '')
+                        _modal.find('.note-group').show().find('#note_this_error').val(notes).attr('disabled', 'true');
                 }
             }
             _modal.modal('show');
         });
-    _modal.on('hide.bs.modal',function () {
+    _modal.on('hide.bs.modal', function() {
         _modal.find('.submit')
             .removeAttr('mv-x')
             .removeAttr('mv-y')
@@ -131,8 +131,8 @@ $(document).ready(function () {
         _modal.find('.delete').addClass('d-none');
         _modal.find(".submit").show();
         _modal.find('#error_type').removeAttr('disabled');
-        _modal.find('.error-other-group').hide().find("#err_other").val('').attr('readonly','true');
-        if(_modal.find('.checked_btn').length > 0){
+        _modal.find('.error-other-group').hide().find("#err_other").val('').attr('readonly', 'true');
+        if (_modal.find('.checked_btn').length > 0) {
             _modal.find('.checked_btn').hide();
         }
         _modal.find('.note-group').hide().find('#note_this_error').val('').removeAttr('disabled');

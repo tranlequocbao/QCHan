@@ -287,7 +287,7 @@ function car() {
             },
             dataType: 'json',
             success: function(data) {
-                console.log(data.path)
+
                 self.cbLoadImg(data, vincode);
 
             },
@@ -300,7 +300,7 @@ function car() {
         let images = result.img;
         let img_append = '';
         let url = result.path;
-        console.log(images);
+
         for (let i in images) {
 
             img_append += `

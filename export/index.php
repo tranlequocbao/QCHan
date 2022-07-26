@@ -3,8 +3,12 @@
     error_reporting(E_ALL);
     ini_set('display_errors', TRUE);
     ini_set('display_startup_errors', TRUE);
-
-    if(!isset($_SESSION)) session_start();
+    session_start();
+    if(!isset($_SESSION['Station'])){
+        header("Location: ../login/logout.php");
+        return;
+    } 
+    
     $station=$_SESSION['Station']; 
 	// if(!isset($_SESSION['IDuser'])&& $station!="All"){
     //     $_SESSION['error'] = 'Chưa đăng nhập hoặc tài khoản không được quyền truy cập!';

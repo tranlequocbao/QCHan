@@ -48,7 +48,7 @@ function car() {
     this.load_check01_qcbody = (vincode) => {
 
         var bodytype = vincode.substring(0, 9);
-        console.log(bodytype);
+        //console.log(bodytype);
         $.ajax({
                 url: 'get_bodytype.php',
                 type: 'POST',
@@ -78,7 +78,7 @@ function car() {
 
                             str = str.replace('-', '');
                             if (e.which != 8 && str.length == 2) {
-                                console.log(str);
+                                //console.log(str);
                                 var index = $(":input").index(this) + 1;
                                 $(":input").eq(index).focus();
                             }
@@ -102,7 +102,7 @@ function car() {
             data: { vincode: bodytype },
             dataType: 'json',
             success: function(data) {
-                console.log(data);
+                //console.log(data);
                 self.cbLoadImg01(data, bodytype);
             },
             error: function(error) {
@@ -291,34 +291,40 @@ function car() {
         return true;
     }
     this.saveImgIfDoneAll = (img) => {
-            $.ajax({
-                url: './saveImageDoneAll.php',
-                type: 'POST',
-                data: {
-                    'images': img,
-                    'vin_code': $("#car_code").val(),
+        $.ajax({
+            url: './saveImageDoneAll.php',
+            type: 'POST',
+            data: {
+                'images': img,
+                'vin_code': $("#car_code").val(),
 
-                },
-                dataType: 'json',
-                success: function(result) {
-                    console.log(result);
-                    return;
-                    // if (exportByTool) {
-                    //     window.location.href = './?all=1';
-                    //     return true;
-                    // }
-                    // window.location.href = window.location.origin + window.location.pathname;
-                    // return true;
-                },
-                error: function(error) {
-                    console.log(error.responseText)
-                    alert('An error hased! please check console or contact admin!');
-                    // if (exportByTool) {
-                    //     window.location.reload(true);
-                    //     return true;
-                    // }
+            },
+            dataType: 'json',
+            success: function(result) {
+                if (result.code == '200') {
+                    $('div').remove('.__loading');
+
+                    window.location.href = result.path;
                 }
-            })
+                // if (exportByTool) {
+                //     window.location.href = './?all=1';
+                //     return true;
+                // }
+                // window.location.href = window.location.origin + window.location.pathname;
+                // return true;
+            },
+            error: function(error) {
+                console.log(error.responseText)
+                alert('An error hased! please check console or contact admin!');
+                // if (exportByTool) {
+                //     window.location.reload(true);
+                //     return true;
+                // }
+            }
+        })
+    }
+    this.downLoad = (path) => {
+
         }
         // this.saveImgIfDoneAll = (img) => {
         //     var exportByTool = false;
@@ -431,7 +437,7 @@ function car() {
         let img_append = '';
         if (images.length > 0) {
             $('.car_area_custom').append("<h2 class='text-center d-block w-100'>Khu vực " + location.toUpperCase() + "</h2>").parent().removeClass('d-none');
-            console.log(images);
+            //console.log(images);
             $(".car_area_custom").append(self.renderImage(images));
             // if(location != null){
 

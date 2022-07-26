@@ -143,7 +143,6 @@ if (strpos($_SERVER['HTTP_HOST'], 'localhost') == 0) {
                   </th>
                 </thead>
                 <tbody id='table-qc'>
-
                 </tbody>
               </table>
             </div>
