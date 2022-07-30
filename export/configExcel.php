@@ -69,8 +69,6 @@ $J59C_SD = [
         '16GapRH'=>'AO38',
         '16StepLH'=>'AL39',
         '16StepRH'=>'AO39',
-       
-        
     ],
     'LH' => [
         "01-LongvesauLH" => "L59",
